@@ -1,8 +1,5 @@
 import { useState } from "react";
-import NewProject from "./components/NewProject";
-import SideBar from "./components/SideBar";
-import NoProject from "./components/NoProject";
-import SelectedProject from "./components/SelectedProject";
+import { SideBar, NoProject, SelectedProject, NewProject } from "@/components";
 
 function App() {
   const [projectState, setProjectState] = useState({
@@ -10,7 +7,6 @@ function App() {
     projects: [],
     tasks: [],
   });
-  console.log("🚀 ~ App ~ projectState:", projectState.tasks);
 
   function handleAddTask(text) {
     setProjectState((prevState) => {
@@ -27,16 +23,11 @@ function App() {
   }
   function handleDeleteTask(id) {
     setProjectState((prevState) => {
-      console.log(
-        "lll",
-        prevState.tasks.filter((task) => task.id != id)
-      );
       return {
         ...prevState,
         tasks: prevState.tasks.filter((task) => task.id != id),
       };
     });
-    console.log(projectState.tasks);
   }
 
   function handleSetProjectState(project) {

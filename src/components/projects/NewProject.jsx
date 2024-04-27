@@ -1,4 +1,6 @@
-import React, { useRef } from "react";
+"use client";
+
+import React, { useRef, useState } from "react";
 import { Input, Button, Textarea } from "@/components/ui";
 import {
   Dialog,
@@ -8,7 +10,19 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 
-const AddProject = ({ onAdd, onClose }) => {
+import { format } from "date-fns";
+import { Calendar as CalendarIcon } from "lucide-react";
+
+import { cn } from "@/lib/utils";
+import { Calendar } from "@/components/ui/calendar";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+
+const NewProject = ({ onAdd, onClose }) => {
+  const [date, setDate] = useState();
   const title = useRef();
   const description = useRef();
   const dueDate = useRef();
@@ -18,18 +32,13 @@ const AddProject = ({ onAdd, onClose }) => {
     const project = {
       title: title.current.value,
       description: description.current.value,
-      dueDate: dueDate.current.value,
+      dueDate: date,
     };
-    if (
-      project.title.trim() === "" ||
-      project.description.trim() === "" ||
-      project.dueDate.trim() === ""
-    ) {
+    if (project.title.trim() === "" || project.description.trim() === "") {
       return setOpen(true);
     }
     title.current.value = "";
     description.current.value = "";
-    dueDate.current.value = "";
     onAdd(project);
   }
 
@@ -63,10 +72,31 @@ const AddProject = ({ onAdd, onClose }) => {
           placeholder="Project Description"
           textarea="true"
         />
-        <Input ref={dueDate} placeholder="Project Due date" type="date" />
+        <Popover>
+          <PopoverTrigger asChild>
+            <Button
+              variant={"outline"}
+              className={cn(
+                "w-full justify-start text-left font-normal ",
+                !date && "text-muted-foreground"
+              )}
+            >
+              <CalendarIcon className="mr-2 h-4 w-4" />
+              {date ? format(date, "PPP") : <span>Pick a date</span>}
+            </Button>
+          </PopoverTrigger>
+          <PopoverContent className="w-auto p-0">
+            <Calendar
+              mode="single"
+              selected={date}
+              onSelect={setDate}
+              initialFocus
+            />
+          </PopoverContent>
+        </Popover>
       </div>
     </div>
   );
 };
 
-export default AddProject;
+export { NewProject };

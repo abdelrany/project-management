@@ -1,8 +1,8 @@
 import React from "react";
-import noProject from "../assets/no-projects.png";
+import noProject from "../../assets/no-projects.png";
 import { Button } from "@/components/ui/button";
 
-const NoProject = ({ onAdd }) => {
+export const NoProject = ({ onAdd }) => {
   return (
     <div className="flex flex-col gap-3 py-4 px-4 justify-center items-center w-full">
       <img src={noProject} alt="logo" className="size-40 mx-auto" />
@@ -14,5 +14,3 @@ const NoProject = ({ onAdd }) => {
     </div>
   );
 };
-
-export default NoProject;

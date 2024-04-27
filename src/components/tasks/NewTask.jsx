@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { Input } from "./ui";
+import { Button, Input } from "../ui";
 
-function NewTask({ onAdd }) {
+export function NewTask({ onAdd }) {
   const [text, setText] = useState("");
   function handleChange(event) {
     setText(event.target.value);
@@ -20,9 +20,9 @@ function NewTask({ onAdd }) {
         onChange={handleChange}
         value={text}
       />
-      <button onClick={handleSubmit}>Add</button>
+      <Button variant="ghost" onClick={handleSubmit}>
+        Add
+      </Button>
     </div>
   );
 }
-
-export default NewTask;

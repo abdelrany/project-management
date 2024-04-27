@@ -1,8 +1,14 @@
 import React from "react";
-import { Button } from "./ui/button";
-import Tasks from "./Tasks";
+import { Button } from "../ui/button";
+import { Tasks } from "@/components";
 
-function SelectedProject({ project, onDelete, tasks, onAdd, onDeleteTask }) {
+export function SelectedProject({
+  project,
+  onDelete,
+  tasks,
+  onAdd,
+  onDeleteTask,
+}) {
   const formatDate = new Date(project?.dueDate).toLocaleDateString("fr-FR", {
     year: "numeric",
     month: "long",
@@ -31,5 +37,3 @@ function SelectedProject({ project, onDelete, tasks, onAdd, onDeleteTask }) {
     </div>
   );
 }
-
-export default SelectedProject;

@@ -1,21 +1,23 @@
 import React from "react";
-import NewTask from "./NewTask";
-import { Button } from "./ui";
+import { Button } from "../ui";
+import { NewTask } from ".";
 
-function Tasks({ tasks, onAdd, onDelete }) {
+export function Tasks({ tasks, onAdd, onDelete }) {
   return (
     <section className="flex flex-col gap-3">
       <NewTask onAdd={onAdd} />
-      {tasks.length === 0 && <p> No tasks yet</p>}
+      {tasks.length === 0 && (
+        <p className="text-gray-400 px-2"> No tasks has been created yet.</p>
+      )}
       {tasks.length > 0 && (
-        <ul className="flex flex-col text-black bg-slate-400 rounded-sm  ">
+        <ul className="text-white justify-start items-center px-2 gap-3 space-y-2">
           {tasks?.map((task) => {
             return (
               <li
                 key={task.id}
-                className="flex gap-3 justify-between  border px-2"
+                className="flex gap-3 justify-between bg-stone-400 rounded-sm px-2 hover:bg-stone-700 hover:text-primary"
               >
-                <span className="text-gray-600 self-center">{task.text}</span>
+                <span className=" self-center">{task.text}</span>
                 <Button
                   variant="ghost"
                   className="text-red-500 hover:bg-inherit"
@@ -31,5 +33,3 @@ function Tasks({ tasks, onAdd, onDelete }) {
     </section>
   );
 }
-
-export default Tasks;
